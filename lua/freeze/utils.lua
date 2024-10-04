@@ -32,9 +32,14 @@ M.copy_image_to_clipboard = function(imgpath)
 
     -- MacOS
   elseif vim.fn.has("mac") == 1 then
-    if vim.fn.executable("pbcopy") then
-      local command = string.format("pbcopy < %s", imgpath)
-      local _, exit_code = M.execute(command)
+    if vim.fn.executable("osascript") then
+      local escaped_path = imgpath:gsub("'", "'\\''")
+
+      local script = string.format([[
+        osascript -e 'set the clipboard to (read (POSIX file "%s") as «class PNGf»)'
+      ]], escaped_path)
+
+      local _, exit_code = M.execute(script)
       return exit_code
     end
 
