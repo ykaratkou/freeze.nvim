@@ -1,5 +1,5 @@
 local Job = require("plenary.job")
-local opts = require("freeze.config").opts
+local config = require("freeze.config")
 local utils = require("freeze.utils")
 local debug = require("freeze.debug")
 
@@ -32,6 +32,8 @@ freeze.exec = function()
   local textpath = "/tmp/_nvim_freeze_code.txt"
   local imgpath = "/tmp/_nvim_freeze.png"
 
+  local opts = config.opts
+
   local args = {
     "--theme",
     opts.theme,
@@ -44,47 +46,58 @@ freeze.exec = function()
   }
 
   if opts.backgroundColor then
-    table.insert(args, "--background " .. opts.backgroundColor)
+    table.insert(args, "--background")
+    table.insert(args, opts.backgroundColor)
   end
 
   if opts.margin then
-    table.insert(args, "--margin " .. opts.margin)
+    table.insert(args, "--margin")
+    table.insert(args, opts.margin)
   end
 
   if opts.padding then
-    table.insert(args, "--padding " .. opts.padding)
+    table.insert(args, "--padding")
+    table.insert(args, opts.padding)
   end
 
   if opts.borderRadius then
-    table.insert(args, "--border.radius " .. opts.borderRadius)
+    table.insert(args, "--border.radius")
+    table.insert(args, opts.borderRadius)
   end
 
   if opts.borderWidth then
-    table.insert(args, "--border.width " .. opts.borderWidth)
+    table.insert(args, "--border.width")
+    table.insert(args, opts.borderWidth)
   end
 
   if opts.borderColor then
-    table.insert(args, "--border.color " .. opts.borderColor)
+    table.insert(args, "--border.color")
+    table.insert(args, opts.borderColor)
   end
 
   if opts.fontSize then
-    table.insert(args, "--font.size " .. opts.fontSize)
+    table.insert(args, "--font.size")
+    table.insert(args, opts.fontSize)
   end
 
   if opts.fontFamily then
-    table.insert(args, "--font.family " .. opts.fontFamily)
+    table.insert(args, "--font.family")
+    table.insert(args, opts.fontFamily)
   end
 
   if opts.shadowBlur then
-    table.insert(args, "--shadow.blur " .. opts.shadowBlur)
+    table.insert(args, "--shadow.blur")
+    table.insert(args, opts.shadowBlur)
   end
 
   if opts.shadowY then
-    table.insert(args, "--shadow.y " .. opts.shadowY)
+    table.insert(args, "--shadow.y")
+    table.insert(args, opts.shadowY)
   end
 
   if opts.shadowX then
-    table.insert(args, "--shadow.x " .. opts.shadowX)
+    table.insert(args, "--shadow.x")
+    table.insert(args, opts.shadowX)
   end
 
   if opts.windowControls then
